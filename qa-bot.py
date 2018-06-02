@@ -90,8 +90,13 @@ async def sayin(ctx, *args):
 async def listadd(ctx, user: discord.Member):
     if "451240245468332033" in [role.id for role in ctx.message.author.roles] or "339613815849353219" in [role.id for role in ctx.message.author.roles] or "450680633560399872" in [role.id for role in ctx.message.author.roles] or "449385190926712863" in [role.id for role in ctx.message.author.roles]:
         if not inlist(user.id):
+            if "\\" in str(user.display_name.encode('unicode_escape')):
+                index = str(user.display_name.encode('unicode_escape')).find("\\")
+                name = str(user.display_name.encode('unicode_escape'))[2:index]
+            else:
+                name = user.display_name
             f = open(listfile, "a")
-            f.write(user.id+"|"+str(user.display_name.encode('unicode_escape'))+"\r\n")
+            f.write(user.id+"|"+name+"\r\n")
             f.close()
             await bot.say(user.mention+" has been added to the list.")
         else:
@@ -159,7 +164,12 @@ async def listinsert(ctx, pos: int, user: discord.Member):
             f = open(listfile, "r")
             lines = f.readlines()
             f.close()
-            lines.insert(pos-1,user.id+"|"+user.display_name+"\r\n")
+            if "\\" in str(user.display_name.encode('unicode_escape')):
+                index = str(user.display_name.encode('unicode_escape')).find("\\")
+                name = str(user.display_name.encode('unicode_escape'))[2:index]
+            else:
+                name = user.display_name
+            lines.insert(pos-1,user.id+"|"+name+"\r\n")
             f = open(listfile, "w")
             f.writelines(lines)
             f.close()
@@ -200,6 +210,16 @@ async def whogo(ctx):
     name = f.read()
     f.close()
     await bot.say(name+" is going.")
+
+@bot.command(pass_context=True)
+async def listpos(ctx, pos: int):
+    f = open(listfile, "r")
+    lines = f.readlines()
+    f.close()
+    index = lines[pos-1].find("|")
+    index2 = lines[pos-1].find("\r\n")
+    name = lines[pos-1][index+1:index2]
+    await bot.say(name+" is in position "+str(pos))
 
 @bot.event
 async def on_message(message):

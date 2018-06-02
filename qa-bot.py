@@ -10,6 +10,7 @@ bot = commands.Bot(command_prefix="~")
 helpfile = "C:\\Users\\Reese\\Desktop\\nohelp.txt"
 faqfile = "C:\\Users\\Reese\\Desktop\\faq.txt"
 listfile = "C:\\Users\\Reese\\Desktop\\list.txt"
+gofile = "C:\\Users\\Reese\\Desktop\\go.txt"
 
 print("Online")
 
@@ -184,6 +185,21 @@ async def listlocate(ctx, user: discord.Member = None):
         await bot.say(user.mention+" is in position "+str(pos)+" on the list.")
     else:
         await bot.say(user.mention+" is not on the list.")
+
+@bot.command(pass_context=True)
+async def setgo(ctx, user: discord.Member):
+    if "451240245468332033" in [role.id for role in ctx.message.author.roles] or "339613815849353219" in [role.id for role in ctx.message.author.roles] or "450680633560399872" in [role.id for role in ctx.message.author.roles] or "449385190926712863" in [role.id for role in ctx.message.author.roles]:
+        f = open(gofile, "w")
+        f.write(user.display_name)
+        f.close()
+        await bot.say(user.mention+" has been set as going.")
+
+@bot.command(pass_context=True)
+async def whogo(ctx):
+    f = open(gofile, "r")
+    name = f.read()
+    f.close()
+    await bot.say(name+" is going.")
 
 @bot.event
 async def on_message(message):

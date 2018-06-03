@@ -19,6 +19,40 @@ messages = {"nohelp":" You have opted out of FAQ help. Opt back in with ~yeshelp
 			"yeshelp":" You have opted back into FAQ help."
 }
 
+faqMessages = {
+	"HowToAscend":" You have to click the candle when it is off and hope no one turns it back off for 777 seconds. We have an organized list of who will ascend in which order, please ask to be added by a List Keeper in <#450922435915677697>",
+	"WhatIsAscension":" Ascension allows you to get out of the hole early. You also receive 51 dedication points and the ability to create a VIP room later.",
+	"HowToJoinChurch":" To join the church, keep refreshing the main page until you see a hand in the bottom left corner. It appears every 336 seconds. You can use https://poppy-church.glitch.me/hand to help.",
+	"HowToEnterHole":" To enter the hole, click the self destruct button on your personal report page.",
+	"HowToGetOut":" You automatically leave the hole after 24 hours, or you can ascend.",
+	"WhatIsGuardian":" Guardians are picked by Poppy, herself. They are usually highly active members of the community.",
+	"WhatIsSupportEmail":" The email is help@poppy.church",
+	"HowToChangeAvatar":" You can change your your avatar at https://poppy.church/settings",
+	"ShouldIClickCandle":" Only click the candle if it is your turn to ascend! To ascend with it, you must be the last person to turn it on before it reaches 0!",
+	"WhatIsCandle":" The candle is used to ascend.",
+	"WhatIsHole":" The hole is the only real game part of the website right now. Once in the hole, you can try to ascend.",
+	"HowToEarnPoint":" They seem to increase over time, multiple people have reported getting points if they have their personal report page open at 3:36 PST. You also get 51 dedication by ascending.",
+	"IsThereAChat":" It is coming, as confirmed by poppy.church support email" ,
+	"HowToChangeSignature":" You can change your signature by contacting the support email at help@poppy.church",
+	"WhatHappensToCandle":" The candle will toggle between on and off. Only click it if it is your turn to ascend!",
+	"WhatAreWhispers":" Check out the pins in <#450469478342328327>.",
+	"WhatIsPopcoin":" https://poppy.church/popcoin was found. We are unsure of what it does. Popcoin was the name given by us to the last section on the personal report.",
+	"WhatArePoints":" We aren't yet sure what the points on the reports are for.",
+	"WhatIsLove":" Baby don't hurt me, don't hurt me, no more",
+	"WhenWillIBeAccepted"," We aren't sure when, hopefully soon!",
+	"WhatIsVip":" You get the ability to create a VIP room by ascending. Nothing else is known about it.",
+	"WhoClicked":" We used to be able to, but it led to harassment and the ability was removed.",
+	"WhatIsSelfDestruct":" Self-destructing takes you to the hole.",
+	"WhatIsHand":" The hand allows you to join the church without a blessing.",
+	"WhatIsResultOfLeaving":" If you ascend, you gain 51 dedication and the ability to make a VIP room later. If you leave after 24 hours, nothing but freedom.",
+	"WhatIsCountDown":" The countdown is long as long as the candle is on. Once it reaches 0, someone ascends.",
+	"WhatIsPhoneNumber":" 831-777-6779",
+	"Loveyou":" I love you, too.",
+	"WhereIsTheCandle":" The candle is in the hole",
+	"WhoIsPoppy":" Poppy is our savior.",
+	"WhatIsPoppyChurch":" Poppy.Church is the house of our savior (also it's an ARG)."
+}
+
 async def send(message, user, response):
 	print("Message: " + message.content)
 	print("Response: " + response)
@@ -260,77 +294,78 @@ async def on_message(message):
 		response = []
 		
 		if "how" in m and "ascend" in m and ("do" in m or "can" in m):
-			response.append(" You have to click the candle when it is off and hope no one turns it back off for 777 seconds. We have an organized list of who will ascend in which order, please ask to be added by a List Keeper in <#450922435915677697>")
+			responses.append(faqMessages["HowToAscend"])
 		if "what" in m and ("ascension" in m or "ascending" in m) and ("is" in m or "does" in m):
-			response.append(" Ascension allows you to get out of the hole early. You also receive 51 dedication points and the ability to create a VIP room later.")
+			responses.append(faqMessages["WhatIsAscension"])
 		if "how" in m and ("join" in m or "hand" in m or "get in" in m or "enter" in m or ("create" in m and "account" in m)) and "joined" not in m and "joining" not in m and ("can" in m or "do" in m) and "hole" not in m:
-			response.append(" To join the church, keep refreshing the main page until you see a hand in the bottom left corner. It appears every 336 seconds. You can use https://poppy-church.glitch.me/hand to help.")
+			responses.append(faqMessages["HowToJoinChurch"])
 		if "how" in m and "hole" in m and ("get in" in m or "enter" in m or "work" in m) and ("do" in m or "can" in m):
-			response.append(" To enter the hole, click the self destruct button on your personal report page.")
+			responses.append(faqMessages["HowToEnterHole"])
 		if "how" in m and "hole" in m and ("get out" in m or "leave" in m or "long" in m) and ("do" in m or "can" in m):
-			response.append(" You automatically leave the hole after 24 hours, or you can ascend.")
-		if ("how" in m or "what" in m) and "guardian" in m and ("do" in m or "is" in m or "are" in m):
-			response.append(" Guardians are picked by Poppy, herself. They are usually highly active members of the community.")
+			responses.append(faqMessages["HowToGetOut"])
+		if ("how" in m or "what" in m) and "guardian" in m and ("do" in m or "is" in m):
+			responses.append(faqMessages["WhatIsGuardian"])
 		if "help " in m and "email" in m and "is" in m:
-			response.append(" The email is help@poppy.church")
+			responses.append(faqMessages["WhatIsSupportEmail"])
 		if "change" in m and "avatar" in m and ("do" in m or "can" in m):   
-			response.append(" You can change your your avatar at https://poppy.church/settings")
+			responses.append(faqMessages["HowToChangeAvatar"])
 		if ("should" in m or "do " in m or "can " in m) and ("click" in m or "touch" in m) and "candle" in m and "not" not in m:
-			response.append(" Only click the candle if it is your turn to ascend! To ascend with it, you must be the last person to turn it on before it reaches 0!")
+			responses.append(faqMessages["ShouldIClickCandle"])
 		if "what" in m and "candle" in m and "happens" not in m:
-			response.append(" The candle is used to ascend.")
+			responses.append(faqMessages["WhatIsCandle"])
 		if "what" in m and "hole" in m and ("is" in m or "does" in m):
-			response.append(" The hole is the only real game part of the website right now. Once in the hole, you can try to ascend.")
+			responses.append(faqMessages["WhatIsHole"])
 		if "how" in m and ("get" in m or "earn" in m or "gain " in m or "receive" in m) and ("points" in m or "dedication" in m or "loyalty" in m or "faith" in m) and ("do" in m or "does" in m or "can" in m):
-			response.append(" They seem to increase over time, multiple people have reported getting points if they have their personal report page open at 3:36 PST. You also get 51 dedication by ascending.")
+			responses.append(faqMessages["HowToEarnPoint"])
 		if ("will" in m or "is" in m) and ("be" in m or "potential" in m) and "chat" in m and "there" in m:
-			response.append("  It is coming, as confirmed by poppy.church support email.")
+			responses.append(faqMessages["IsThereAChat"])
 		if "change" in m and "signature" in m and ("do" in m or "can" in m):
-			response.append(" You can change your signature by contacting the support email at help@poppy.church")
+			responses.append(faqMessages["HowToChangeSignature"])
 		if "what" in m and "candle" in m and "happens" in m:
-			response.append(" The candle will toggle between on and off. Only click it if it is your turn to ascend!")
+			responses.append(faqMessages["WhatHappensToCandle"])
 		if "what" in m and "are" in m and "whispers" in m:
-			response.append(" Check out the pins in <#450469478342328327>.")
+			responses.append(faqMessages["WhatAreWhispers"])
 		if "what" in m and ("is" in m or "are" in m) and "popcoin" in m:
-			response.append(" https://poppy.church/popcoin was found. We are unsure of what it does. Popcoin was the name given by us to the last section on the personal report.")
+			responses.append(faqMessages["WhatIsPopcoin"])
 		if "what" in m and ("is" in m or "are" in m) and ("points" in m or "dedication" in m or "loyalty" in m or "faith" in m):
-			response.append(" We aren't yet sure what the points on the reports are for.")
+			responses.append(faqMessages["WhatArePoints"])
 		if "what is love" in m:
-			response.append(" Baby don't hurt me, don't hurt me, no more")
+			responses.append(faqMessages["WhatIsLove"])
 		if "when" in m and ("floor" in m or "accepted" in m):
-			response.append(" We aren't sure when, hopefully soon!")
+			responses.append(faqMessages["WhenWillIBeAccepted"])
 		if "what" in m and ("get" in m or "receive" in m or "earn" in m) and "ascend" in m:
-			response.append(" You receive 51 dedication points and the ability to create a VIP room later.")
+			responses.append(faqMessages["WhatIsAscension"])
 		if "what" in m and "vip" in m:
-			response.append(" You get the ability to create a VIP room by ascending. Nothing else is known about it.")
+			responses.append(faqMessages["WhatIsVip"])
 		if "can" in m and "see" in m and ("click" in m or "touch" in m) and "candle" in m:
-			response.append(" We used to be able to, but it led to harassment and the ability was removed.")
+			responses.append(faqMessages["WhoClicked"])
 		if "what" in m and "self" in m and "destruct" in m:
-			response.append(" Self-destructing takes you to the hole.")
+			responses.append(faqMessages["WhatIsSelfDestruct"])
 		if "what" in m and "hand" in m and ("is" in m or "do" in m):
-			response.append(" The hand allows you to join the church without a blessing.")
+			responses.append(faqMessages["WhatIsHand"])
 		if "what" in m and ("happens" in m or ("do" in m and ("get" in m or "receive" in m or "earn" in m))) and "leave" in m and "hole" in m:
-			response.append(" If you ascend, you gain 51 dedication and the ability to make a VIP room later. If you leave after 24 hours, nothing but freedom.")
+			responses.append(faqMessages["WhatIsResultOfLeaving"])
 		if "what" in m and "countdown" in m and ("do" in m or "for" in m):
-			response.append(" The countdown is long as long as the candle is on. Once it reaches 0, someone ascends.")
+			responses.append(faqMessages["WhatIsCountDown"])
 		if "what" in m and "phone number" in m:
-			response.append(" 831-777-6779")
+			responses.append(faqMessages["WhatIsPhoneNumber"])
 		if "339567608338710530" in m and "love" in m and "you" in m:
-			response.append(" I love you, too.")
+			responses.append(faqMessages["Loveyou"])
 		if "where" in m and "is" in m and "candle" in m:
-			response.append(" The candle is in the hole.")
+			responses.append(faqMessages["WhereIsTheCandle"])
+		if "who" in m and "is" in m and "poppy" in m:
+			response.append(faqMessages["WhoIsPoppy"])
+		if "what" in m and "is" in m and "poppy.church" in m:
+			response.append(faqMessages["WhatIsPoppyChurch"])
+		
+		"""Special FAQ"""
 		if ("we" in m or "i" in m) and " not in a cult" in m:
 			await bot.send_message(message.channel,message.content)
 		if "would you wear it" in m:
 			await bot.send_message(message.channel,"Wear a carrot?")
-		if "who" in m and "is" in m and "poppy" in m:
-			response.append(" Poppy is our savior.")
-		if "what" in m and "is" in m and "poppy.church" in m:
-			response.append(" Poppy.Church is the house of our savior (also it's an ARG).")
 		
-		if response != []:
-			for answer in response:
-				await send(message, user, answer)
+		for answer in response:
+			await send(message, user, answer)
 				
 	await bot.process_commands(message)
 

@@ -103,7 +103,7 @@ async def listadd(ctx, user: discord.Member):
 				name = str(user.display_name.encode('unicode_escape'))[2:index]
 			else:
 				name = user.display_name
-			f = open(listfile, "a")
+			f = open(dataFiles["list"], "a")
 			f.write(user.id+"|"+name+"\r\n")
 			f.close()
 			message = " has been added to the list."
@@ -125,19 +125,19 @@ async def listremove(ctx, user: discord.Member):
 			await bot.say(user.display_name+" is not on the list.")
 
 @bot.command(pass_context=True)
-async def list(ctx, limit=10):
+async def list(ctx):
 	guild = ctx.message.channel.server
 	lines = getLines(dataFiles["list"])
-	total = len(lines)
-	
-	if limit > total:
-		limit = total	
-	lines = lines[:limit]
 	
 	index=0
 	n=0
 	output = ""
-	embed = discord.Embed()
+	embedSent = False
+
+	toDelete=[]
+	async for x in bot.logs_from(guild.get_channel("452213143926734859")):
+		toDelete.append(x)
+	await bot.delete_messages(toDelete)
 
 	for line in lines:
 		print(line)
@@ -145,19 +145,25 @@ async def list(ctx, limit=10):
 			index = line.find("|")
 			nums = line[:index]
 			n += 1
-			output += str(n)+". "+guild.get_member(str(nums)).display_name+"\n"
+			output += str(n)+". "+guild.get_member(str(nums)).mention+"\n"
 			print(len(output))
 			if len(output) > 1930:
-				embed.add_field(name="List:",value=output)
+				if not embedSent:
+					embed = discord.Embed(title="List:",description=output)
+				else:
+					embed = discord.Embed(description=output)
 				await bot.send_message(guild.get_channel("452213143926734859"),embed=embed)
-				embed = discord.Embed()
+				output = ""
+				embedSent = True
 
-	output += "Listed "+str(limit)+" out of "+str(total)+".\n"
 	goingList = getLines(dataFiles["go"])
 	goingString = goingList[0]
 	going = guild.get_member(str(goingString))
-	output += going.display_name+" is going."
-	embed.add_field(name="List:",value=output)
+	output += going.mention+" is going."
+	if not embedSent:
+		embed = discord.Embed(title="List:",description=output)
+	else:
+		embed = discord.Embed(description=output)
 	await bot.send_message(guild.get_channel("452213143926734859"),embed=embed)
 
 @bot.command(pass_context=True)
@@ -314,13 +320,13 @@ async def on_message(message):
 		if "where" in m and "is" in m and "candle" in m:
 			response = " The candle is in the hole"
 		if ("we" in m or "i" in m) and " not in a cult" in m:
-			response = message.content
+			await bot.send_message(message.channel,message.content)
 		if "would you wear it" in m:
-			response = "Wear a carrot?"
+			await bot.send_message(message.channel,"Wear a carrot?")
 		
 		if response != "":
 			await send(message, user, response)
 				
 	await bot.process_commands(message)
 
-bot.run("NOT THIS TIME")
+bot.run("NO")

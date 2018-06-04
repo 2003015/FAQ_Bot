@@ -138,8 +138,10 @@ async def listadd(ctx, user: discord.Member):
 			else:
 				name = user.display_name
 			f = open(dataFiles["list"], "a")
-			f.write(user.id+"|"+name+"\r\n")
+			f.write(user.id+"|"+name+"\n")
 			f.close()
+			lines = getLines(dataFiles["list"])
+			print([item for item in lines if not item.isspace()])
 			message = " has been added to the list."
 		else:
 			message = " is already on the list."
@@ -149,8 +151,7 @@ async def listadd(ctx, user: discord.Member):
 async def listremove(ctx, user: discord.Member):
 	if canEditList(ctx.message.author):
 		if inlist(user.id):
-			lines = getLines(dataFiles["list"])
-			
+			lines = getLines(dataFiles["list"])		
 			file = open(dataFiles["list"], "w")
 			file.writelines([item for item in lines if user.id not in item and not item.isspace()])
 			file.close()
@@ -171,7 +172,10 @@ async def list(ctx):
 	toDelete=[]
 	async for x in bot.logs_from(guild.get_channel("452213143926734859")):
 		toDelete.append(x)
-	await bot.delete_messages(toDelete)
+	if len(toDelete) > 1:
+		await bot.delete_messages(toDelete)
+	elif len(toDelete) == 1:
+		await bot.delete_message(toDelete[0])
 
 	for line in lines:
 		print(line)
@@ -179,7 +183,7 @@ async def list(ctx):
 			index = line.find("|")
 			nums = line[:index]
 			n += 1
-			output += str(n)+". "+guild.get_member(str(nums)).mention+"\n"
+			output += str(n)+". "+guild.get_member(str(nums)).display_name+"\n"
 			print(len(output))
 			if len(output) > 1930:
 				if not embedSent:
@@ -193,7 +197,7 @@ async def list(ctx):
 	goingList = getLines(dataFiles["go"])
 	goingString = goingList[0]
 	going = guild.get_member(str(goingString))
-	output += going.mention+" is going."
+	output += going.display_name+" is going."
 	if not embedSent:
 		embed = discord.Embed(title="List:",description=output)
 	else:
@@ -201,27 +205,16 @@ async def list(ctx):
 	await bot.send_message(guild.get_channel("452213143926734859"),embed=embed)
 
 @bot.command(pass_context=True)
-async def embedtest(ctx):
-	embed1 = discord.Embed(title="True")
-	embed2 = discord.Embed(title="False")
-	embed1.add_field(name="True",value="True",inline=True)
-	embed2.add_field(name="False",value="False",inline=False)
-	await bot.say(embed=embed1)
-	await bot.say(embed=embed2)
-
-
-@bot.command(pass_context=True)
 async def next(ctx):
-	if canEditList(ctx.message.author):
-		guild = ctx.message.channel.server
-		lines = getLines(dataFiles["list"])
-		for line in lines:
-			index = line.find("|")
-			id = line[:index]
-			member = guild.get_member(str(id))
-			if member.status == guild.get_member(bot.user.id).status:
-				break
-		await bot.say(member.display_name+" is the next online person on the list.")
+	guild = ctx.message.channel.server
+	lines = getLines(dataFiles["list"])
+	for line in lines:
+		index = line.find("|")
+		id = line[:index]
+		member = guild.get_member(str(id))
+		if member.status == guild.get_member(bot.user.id).status:
+			break
+	await bot.say(member.display_name+" is the next online person on the list.")
 
 @bot.command(pass_context=True)
 async def listinsert(ctx, pos: int, user: discord.Member):
@@ -233,9 +226,9 @@ async def listinsert(ctx, pos: int, user: discord.Member):
 				name = str(user.display_name.encode('unicode_escape'))[2:index]
 			else:
 				name = user.display_name
-			lines.insert(pos-1,user.id+"|"+name+"\r\n")
-			f = open(listfile, "w")
-			f.writelines(lines)
+			lines.insert(pos-1,user.id+"|"+name+"\n")
+			f = open(dataFiles["list"], "w")
+			f.writelines([item for item in lines if not item.isspace()])
 			f.close()
 			await bot.say(user.display_name+" has been inserted into the list at position "+str(pos)+".")
 		else:
@@ -277,11 +270,12 @@ async def whogo(ctx):
 
 @bot.command(pass_context=True)
 async def listpos(ctx, pos: int):
-	line = getLines(dataFiles["list"])
+	guild = ctx.message.channel.server
+	lines = getLines(dataFiles["list"])
 	index = lines[pos-1].find("|")
-	index2 = lines[pos-1].find("\r\n")
-	name = lines[pos-1][index+1:index2]
-	await bot.say(name+" is in position "+str(pos))
+	nums = lines[pos-1][:index]
+	name = guild.get_member(str(nums)).display_name
+	await bot.say(name+" is in position "+str(pos)+" on the list.")
 
 @bot.event
 async def on_message(message):
@@ -371,10 +365,11 @@ async def on_message(message):
 
 @bot.event
 async def on_member_remove(member):
-	if inlist(user.id):
+	if inlist(member.id):
 		lines = getLines(dataFiles["list"])
 		file = open(dataFiles["list"], "w")
 		file.writelines([item for item in lines if member.id not in item and not item.isspace()])
 		file.close()
+		print(member.display_name+" removal processed.")
 
 bot.run("")

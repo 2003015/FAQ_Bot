@@ -1,3 +1,4 @@
+# noinspection PyInterpreter
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -84,7 +85,7 @@ def removeFromSupport(user: discord.Member):
 	addDataToFile("help", user.id)
 	
 def addToSupport(user: discord.Member):
-	lines = getLines(dataFiles["help"])		
+	lines = getLines(dataFiles["help"])     
 	"""AddList = lambda list, user : [item for item in list if user.id not in item and not item.isspace()]"""
 	file = open(dataFiles["help"], "w")
 	file.writelines([item for item in lines if user.id not in item and not item.isspace()])
@@ -104,7 +105,7 @@ async def nohelp(ctx):
 async def yeshelp(ctx):
 	if inhelp(ctx.message.author.id):
 		print("Yes help: "+ctx.message.author.display_name)
-		removeFromSupport(ctx.message.author)		
+		removeFromSupport(ctx.message.author)       
 		await bot.say(ctx.message.author.mention + messages["yeshelp"])
 
 @bot.command(pass_context=True)
@@ -150,7 +151,7 @@ async def listadd(ctx, user: discord.Member):
 async def listremove(ctx, user: discord.Member):
 	if canEditList(ctx.message.author):
 		if inlist(user.id):
-			lines = getLines(dataFiles["list"])		
+			lines = getLines(dataFiles["list"])     
 			file = open(dataFiles["list"], "w")
 			file.writelines([item for item in lines if user.id not in item and not item.isspace()])
 			file.close()
@@ -202,15 +203,19 @@ async def list(ctx):
 	await bot.send_message(guild.get_channel("452213143926734859"),embed=embed)
 
 @bot.command(pass_context=True)
-async def next(ctx):
+async def next(ctx, num: int = 0):
 	guild = ctx.message.channel.server
 	lines = getLines(dataFiles["list"])
+	count = 0
 	for line in lines:
 		index = line.find("|")
 		id = line[:index]
 		member = guild.get_member(str(id))
 		if member.status == guild.get_member(bot.user.id).status:
-			break
+			if count == num:
+				break
+			else:
+				count += 1
 	await bot.say(member.display_name+" is the next online person on the list.")
 
 @bot.command(pass_context=True)
@@ -369,4 +374,4 @@ async def on_member_remove(member):
 		file.close()
 		print(member.display_name+" removal processed.")
 
-bot.run("")
+bot.run("MzM5NTY3NjA4MzM4NzEwNTMw.DfSytA.GpmuqEcKNyTm-BzNAvX6vqva95o")

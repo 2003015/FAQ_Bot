@@ -39,7 +39,7 @@ faqMessages = {
 	"WhatIsPopcoin":" https://poppy.church/popcoin was found. We are unsure of what it does. Popcoin was the name given by us to the last section on the personal report.",
 	"WhatArePoints":" We aren't yet sure what the points on the reports are for.",
 	"WhatIsLove":" Baby don't hurt me, don't hurt me, no more",
-	"WhenWillIBeAccepted"," We aren't sure when, hopefully soon!",
+	"WhenWillIBeAccepted":" We aren't sure when, hopefully soon!",
 	"WhatIsVip":" You get the ability to create a VIP room by ascending. Nothing else is known about it.",
 	"WhoClicked":" We used to be able to, but it led to harassment and the ability was removed.",
 	"WhatIsSelfDestruct":" Self-destructing takes you to the hole.",
@@ -56,7 +56,7 @@ faqMessages = {
 async def send(message, user, response):
 	print("Message: " + message.content)
 	print("Response: " + response)
-	file = open(dataFiles["help"], "a")
+	file = open(dataFiles["faq"], "a")
 	file.write("Message: " + message.content + "\n")
 	file.write("Response: " + response+"\n\n")
 	file.close()
@@ -141,7 +141,6 @@ async def listadd(ctx, user: discord.Member):
 			f.write(user.id+"|"+name+"\n")
 			f.close()
 			lines = getLines(dataFiles["list"])
-			print([item for item in lines if not item.isspace()])
 			message = " has been added to the list."
 		else:
 			message = " is already on the list."
@@ -178,13 +177,11 @@ async def list(ctx):
 		await bot.delete_message(toDelete[0])
 
 	for line in lines:
-		print(line)
 		if len(line) > 1:
 			index = line.find("|")
 			nums = line[:index]
 			n += 1
 			output += str(n)+". "+guild.get_member(str(nums)).display_name+"\n"
-			print(len(output))
 			if len(output) > 1930:
 				if not embedSent:
 					embed = discord.Embed(title="List:",description=output)
@@ -285,7 +282,7 @@ async def on_message(message):
 	lines = getLines(dataFiles["help"])
 
 	if not inhelp(user.id) and len(m) <= 50:
-		response = []
+		responses = []
 		
 		if "how" in m and "ascend" in m and ("do" in m or "can" in m):
 			responses.append(faqMessages["HowToAscend"])
@@ -297,7 +294,7 @@ async def on_message(message):
 			responses.append(faqMessages["HowToEnterHole"])
 		if "how" in m and "hole" in m and ("get out" in m or "leave" in m or "long" in m) and ("do" in m or "can" in m):
 			responses.append(faqMessages["HowToGetOut"])
-		if ("how" in m or "what" in m) and "guardian" in m and ("do" in m or "is" in m):
+		if ("how" in m or "what" in m) and "guardian" in m and ("do" in m or "is" in m or "are" in m):
 			responses.append(faqMessages["WhatIsGuardian"])
 		if "help " in m and "email" in m and "is" in m:
 			responses.append(faqMessages["WhatIsSupportEmail"])
@@ -337,7 +334,7 @@ async def on_message(message):
 			responses.append(faqMessages["WhatIsSelfDestruct"])
 		if "what" in m and "hand" in m and ("is" in m or "do" in m):
 			responses.append(faqMessages["WhatIsHand"])
-		if "what" in m and ("happens" in m or ("do" in m and ("get" in m or "receive" in m or "earn" in m))) and "leave" in m and "hole" in m:
+		if "what" in m and ("happens" in m or ("do" in m and ("get" in m or "receive" in m or "earn" in m))) and ("leave" in m or "leaving " in m) and "hole" in m:
 			responses.append(faqMessages["WhatIsResultOfLeaving"])
 		if "what" in m and "countdown" in m and ("do" in m or "for" in m):
 			responses.append(faqMessages["WhatIsCountDown"])
@@ -348,9 +345,9 @@ async def on_message(message):
 		if "where" in m and "is" in m and "candle" in m:
 			responses.append(faqMessages["WhereIsTheCandle"])
 		if "who" in m and "is" in m and "poppy" in m:
-			response.append(faqMessages["WhoIsPoppy"])
+			responses.append(faqMessages["WhoIsPoppy"])
 		if "what" in m and "is" in m and "poppy.church" in m:
-			response.append(faqMessages["WhatIsPoppyChurch"])
+			responses.append(faqMessages["WhatIsPoppyChurch"])
 		
 		"""Special FAQ"""
 		if ("we" in m or "i" in m) and " not in a cult" in m:
@@ -358,7 +355,7 @@ async def on_message(message):
 		if "would you wear it" in m:
 			await bot.send_message(message.channel,"Wear a carrot?")
 		
-		for answer in response:
+		for answer in responses:
 			await send(message, user, answer)
 				
 	await bot.process_commands(message)
@@ -372,4 +369,4 @@ async def on_member_remove(member):
 		file.close()
 		print(member.display_name+" removal processed.")
 
-bot.run("")
+bot.run("MzM5NTY3NjA4MzM4NzEwNTMw.DfSytA.GpmuqEcKNyTm-BzNAvX6vqva95o")

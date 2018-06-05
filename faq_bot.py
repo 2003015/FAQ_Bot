@@ -369,4 +369,4 @@ async def on_member_remove(member):
 		file.close()
 		print(member.display_name+" removal processed.")
 
-bot.run("MzM5NTY3NjA4MzM4NzEwNTMw.DfSytA.GpmuqEcKNyTm-BzNAvX6vqva95o")
+bot.run("")

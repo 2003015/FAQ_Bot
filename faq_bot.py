@@ -1,4 +1,3 @@
-# noinspection PyInterpreter
 import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -223,11 +222,11 @@ async def next(ctx, num: int = 0):
 				else:
 					count += 1
 		if (count+1)%10 == 1:
-			await bot.say(user.display_name+" is the "+str(count)+"st online person on the list.")
+			await bot.say(member.display_name+" is the "+str(count+1)+"st next online person on the list.")
 		elif (count+1)%10 == 2:
-			await bot.say(user.display_name+" is the "+str(count)+"nd next online person on the list.")
+			await bot.say(member.display_name+" is the "+str(count+1)+"nd next online person on the list.")
 		elif (count+1)%10 == 3:
-			await bot.say(user.display_name+" is the "+str(count)+"rd next online person on the list.")
+			await bot.say(member.display_name+" is the "+str(count+1)+"rd next online person on the list.")
 		else:
 			await bot.say(member.display_name+" is the "+str(count+1)+"th next online person on the list.")
 

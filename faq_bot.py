@@ -10,10 +10,13 @@ print("Online")
 
 bot = commands.Bot(command_prefix="~")
 
+listDebugState = False
+
 dataFiles = {"help":"C:\\Users\\Reese\\Desktop\\nohelp.txt",
 				"faq":"C:\\Users\\Reese\\Desktop\\faq.txt",
 				"list":"C:\\Users\\Reese\\Desktop\\list.txt",
-				"go":"C:\\Users\\Reese\\Desktop\\go.txt"
+				"go":"C:\\Users\\Reese\\Desktop\\go.txt",
+				"token":"C:\\Users\\Reese\\Desktop\\token.txt"
 }
 
 messages = {"nohelp":" You have opted out of FAQ help. Opt back in with ~yeshelp",
@@ -182,6 +185,8 @@ async def list(ctx):
 			index = line.find("|")
 			nums = line[:index]
 			n += 1
+			if listDebugState:
+				print(nums)
 			output += str(n)+". "+guild.get_member(str(nums)).display_name+"\n"
 			if len(output) > 1930:
 				if not embedSent:
@@ -204,19 +209,27 @@ async def list(ctx):
 
 @bot.command(pass_context=True)
 async def next(ctx, num: int = 0):
-	guild = ctx.message.channel.server
-	lines = getLines(dataFiles["list"])
-	count = 0
-	for line in lines:
-		index = line.find("|")
-		id = line[:index]
-		member = guild.get_member(str(id))
-		if member.status == guild.get_member(bot.user.id).status:
-			if count == num:
-				break
-			else:
-				count += 1
-	await bot.say(member.display_name+" is the next online person on the list.")
+	if num >= 0:
+		guild = ctx.message.channel.server
+		lines = getLines(dataFiles["list"])
+		count = 0
+		for line in lines:
+			index = line.find("|")
+			id = line[:index]
+			member = guild.get_member(str(id))
+			if member.status == guild.get_member(bot.user.id).status:
+				if count == num:
+					break
+				else:
+					count += 1
+		if (count+1)%10 == 1:
+			await bot.say(user.display_name+" is the "+str(count)+"st online person on the list.")
+		elif (count+1)%10 == 2:
+			await bot.say(user.display_name+" is the "+str(count)+"nd next online person on the list.")
+		elif (count+1)%10 == 3:
+			await bot.say(user.display_name+" is the "+str(count)+"rd next online person on the list.")
+		else:
+			await bot.say(member.display_name+" is the "+str(count+1)+"th next online person on the list.")
 
 @bot.command(pass_context=True)
 async def listinsert(ctx, pos: int, user: discord.Member):
@@ -278,6 +291,40 @@ async def listpos(ctx, pos: int):
 	nums = lines[pos-1][:index]
 	name = guild.get_member(str(nums)).display_name
 	await bot.say(name+" is in position "+str(pos)+" on the list.")
+
+@bot.command(pass_context=True)
+async def onlinelocate(ctx, user: discord.Member = None):
+	guild = ctx.message.channel.server
+	if user == None:
+		user = ctx.message.author
+	lines = getLines(dataFiles["list"])
+	count = 1
+	for line in lines:
+		index = line.find("|")
+		id = line[:index]
+		member = guild.get_member(str(id))
+		if member.status == guild.get_member(bot.user.id).status:
+			if user.id in line:
+				break
+			else:
+				count += 1
+	if member.display_name != user.display_name:
+		await bot.say(user.display_name+" is not on the list.")
+	elif count%10 == 1:
+		await bot.say(user.display_name+" is the "+str(count)+"st next online person on the list.")
+	elif count%10 == 2:
+		await bot.say(user.display_name+" is the "+str(count)+"nd next online person on the list.")
+	elif count%10 == 3:
+		await bot.say(user.display_name+" is the "+str(count)+"rd next online person on the list.")
+	else:
+		await bot.say(user.display_name+" is the "+str(count)+"th next online person on the list.")
+
+@bot.command(pass_context=True)
+async def listdebug(ctx, state: bool):
+	if "219260963268984832" in ctx.message.author.id:
+		global listDebugState 
+		listDebugState = state
+
 
 @bot.event
 async def on_message(message):
@@ -374,4 +421,4 @@ async def on_member_remove(member):
 		file.close()
 		print(member.display_name+" removal processed.")
 
-bot.run("MzM5NTY3NjA4MzM4NzEwNTMw.DfSytA.GpmuqEcKNyTm-BzNAvX6vqva95o")
+bot.run(getLines(dataFiles["token"])[0])

@@ -101,10 +101,11 @@ def initializeDataFiles():
 def GetUserLanguage(id):
 	userLang = "en"
 	if inDataFile("lang", id):
-		lines = getLines["lang"]
+		lines = getLines(dataFiles["lang"])
 		for line in lines:
-			data = line.split("|")
-			userLang = data[1]
+			index = line.find("|")
+			userLang = line[index+1:-1]
+			print(userLang)
 			break
 	return userLang
 
@@ -159,8 +160,10 @@ def inlist(id):
 @bot.command(pass_context=True)
 async def lang(ctx, language):
 	if len(language) < 15:
-		if GetLangCode(language) != "":
+		langCode = GetLangCode(language)
+		if langCode != "":
 			addDataToFile("lang", ctx.message.author.id + "|" + langCode)
+			await bot.say(ctx.message.author.mention+" Your language has been updated.")
 		else:
 			await bot.say(ctx.message.author.mention + " Sorry I do not speak " + language + " yet.")
 	

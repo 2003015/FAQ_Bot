@@ -13,7 +13,8 @@ bot_prefix="~"
 bot = commands.Bot(command_prefix=bot_prefix)
 
 listDebugState = False
-dataFileLocation = "C:\\Users\\" + os.getlogin() + "\\deleteMe\\Desktop"
+dataFileLocation = "C:\\Users\\" + os.getlogin() + "\\Desktop\\Poppy.Church"
+print(os.getlogin())
 
 dataFiles = {"help":dataFileLocation + "\\nohelp.txt",
 				"faq":dataFileLocation + "\\faq.txt",
@@ -94,7 +95,7 @@ faqMessages = {
 
 def initializeDataFiles():
 	for key, value in dataFiles.items():
-		file = open(value, "w+")
+		file = open(value, "r+")
 		file.close()
 
 def GetUserLanguage(id):
@@ -114,15 +115,6 @@ def GetLangCode(language):
 	elif language == "en" or "english":
 		langCode = "en"
 	return langCode
-	
-def addUserLanguage(id, language):
-	if len(language) < 15:
-		if GetLangCode(language) != "":
-			addDataToFile("lang", id + "|" + langCode)
-		else:
-			await bot.say(ctx.message.author.mention + " Sorry I do not speak : '" + language + "' yet.")
-	else:
-		await bot.say(ctx.message.author.mention + " Invalid command. \nTry " + bot_prefix +"'help -list' ")
 	
 async def send(message, user, response):
 	print("Message: " + message.content)
@@ -165,16 +157,12 @@ def inlist(id):
 	return inDataFile("list", (id))
 	
 @bot.command(pass_context=True)
-async def help(ctx, *args):
-	try:
-		if args[1] == "-lang":
-			addUserLanguage(args[2])
-		elif args[1] == "-list":
-			await bot.say(ctx.message.author.mention + " I will soon be able to help you with that.")
-	except (IndexError):
-		await bot.say(ctx.message.author.mention + " Invalid number of argument. \nTry " + bot_prefix +"'help -list' ")
-	else:
-		await bot.say(ctx.message.author.mention + " Invalid command. \nTry " + bot_prefix +"'help -list' ")
+async def lang(ctx, language):
+	if len(language) < 15:
+		if GetLangCode(language) != "":
+			addDataToFile("lang", ctx.message.author.id + "|" + langCode)
+		else:
+			await bot.say(ctx.message.author.mention + " Sorry I do not speak " + language + " yet.")
 	
 @bot.command(pass_context=True)
 async def nohelp(ctx):

@@ -14,7 +14,6 @@ bot = commands.Bot(command_prefix=bot_prefix)
 
 listDebugState = False
 dataFileLocation = "C:\\Users\\" + os.getlogin() + "\\Desktop\\Poppy.Church"
-print(os.getlogin())
 
 dataFiles = {"help":dataFileLocation + "\\nohelp.txt",
 				"faq":dataFileLocation + "\\faq.txt",
@@ -29,37 +28,52 @@ messages = {"nohelp":" You have opted out of FAQ help. Opt back in with ~yeshelp
 }
 
 faqMessages = {
-	"en":{"HowToAscend":" You have to click the candle when it is off and hope no one turns it back off for 777 seconds. We have an organized list of who will ascend in which order, please ask to be added by a List Keeper in <#450922435915677697>",
-		"WhatIsAscension":" Ascension allows you to get out of the hole early. You also receive 51 dedication points and the ability to create a VIP room later.",
-		"HowToJoinChurch":" To join the church, keep refreshing the main page until you see a hand in the bottom left corner. It appears every 336 seconds. You can use https://poppy-church.glitch.me/hand to help.",
-		"HowToEnterHole":" To enter the hole, click the self destruct button on your personal report page.",
-		"HowToGetOut":" You automatically leave the hole after 24 hours, or you can ascend.",
+	"en":{"HowToAscend":" You have to click the candle when it is off and hope no one turns it back off for 777 seconds. Ascension is no longer possible.",
+		"WhatIsAscension":" Ascensions allows you to get out of the hole early and also gives you a VIP room on floor one and 50+ dedication points. Ascension is no longer possible.",
+		"HowToJoinChurch":" www.poppy.church.com has now been updated to a include a sign up function.",
+		"HowToEnterHole":" To enter the hole click the self destruct button on your personal report. The self destruct button is now gone, as is the hole",
+		"HowToGetOut":" You automatically leave the hole after 24hrs. Or by ascension. The hole and Ascension are currently no longer available.",
 		"WhatIsGuardian":" Guardians are picked by Poppy, herself. They are usually highly active members of the community.",
 		"WhatIsSupportEmail":" The email is help@poppy.church",
 		"HowToChangeAvatar":" You can change your your avatar at https://poppy.church/settings",
-		"ShouldIClickCandle":" Only click the candle if it is your turn to ascend! To ascend with it, you must be the last person to turn it on before it reaches 0!",
+		"ShouldIClickCandle":" Only click the candle if it is your turn to ascend! To ascend with it you must be the last person to turn it on before it reaches 0. The candle was located in the hole, which is currently no longer available.",
 		"WhatIsCandle":" The candle is used to ascend.",
-		"WhatIsHole":" The hole is the only real game part of the website right now. Once in the hole, you can try to ascend.",
-		"HowToEarnPoint":" They seem to increase over time, multiple people have reported getting points if they have their personal report page open at 3:36 PST. You also get 51 dedication by ascending.",
-		"IsThereAChat":" It is coming, as confirmed by poppy.church support email" ,
+		"WhatIsHole":" The hole was a dark placed lit by a candle at the start of poppy.church. It was the first ‘game’ to play. The hole eventually was blessed with a lovely candle, and along with the candle came a timer which counted down to 0 from 777. At the end of the countdown the last person to turn on the candle would ascend. The hole is currently unavailable with a hinted possible return.",
+		"HowToEarnPoint":" Point’s seem to be currently frozen. In the early stages of the website, points were given if you were logged on at 336. As well as 50+dedication for ascension.",
+		"IsThereAChat":" There is now a chat room! The atrium!" ,
 		"HowToChangeSignature":" You can change your signature by contacting the support email at help@poppy.church",
-		"WhatHappensToCandle":" The candle will toggle between on and off. Only click it if it is your turn to ascend!",
-		"WhatAreWhispers":" Check out the pins in <#450469478342328327>.",
+		"WhatHappensToCandle":" The candle will toggle between on and off. Only click it if it is your turn to ascend. The candle and hole are currently unavailable.",
+		"WhatAreWhispers":" www.poppy.church/whispers is where sometimes we are given clues/messages. They can sometimes also be heard on the phone number.",
 		"WhatIsPopcoin":" https://poppy.church/popcoin was found. We are unsure of what it does. Popcoin was the name given by us to the last section on the personal report.",
 		"WhatArePoints":" We aren't yet sure what the points on the reports are for.",
 		"WhatIsLove":" Baby don't hurt me, don't hurt me, no more",
-		"WhenWillIBeAccepted":" We aren't sure when, hopefully soon!",
+		"WhenWillIBeAccepted":" We currently aren’t sure. But **They** has given us a hint that when the chimes sound, the doors will open.",
 		"WhatIsVip":" You get the ability to create a VIP room by ascending. Nothing else is known about it.",
 		"WhoClicked":" We used to be able to, but it led to harassment and the ability was removed.",
-		"WhatIsSelfDestruct":" Self-destructing takes you to the hole.",
-		"WhatIsHand":" The hand allows you to join the church without a blessing.",
+		"WhatIsSelfDestruct":" Self-destructing takes you to the hole. Neither are available right now.",
+		"WhatIsHand":" The hand allows you to join the church without a blessing text. The hand is no longer needed.",
 		"WhatIsResultOfLeaving":" If you ascend, you gain 51 dedication and the ability to make a VIP room later. If you leave after 24 hours, nothing but freedom.",
-		"WhatIsCountDown":" The countdown is long as long as the candle is on. Once it reaches 0, someone ascends.",
+		"WhatIsCountDown":" The countdown is running as long as the candle is on. Once it reaches 0 from 777 someone ascends. The countdown,candle and hole are currently unavailable.",
 		"WhatIsPhoneNumber":" 831-777-6779",
 		"Loveyou":" I love you, too.",
-		"WhereIsTheCandle":" The candle is in the hole",
+		"WhereIsTheCandle":" The candle was located in the hole, which is no longer available.",
 		"WhoIsPoppy":" Poppy is our savior.",
-		"WhatIsPoppyChurch":" Poppy.Church is the house of our savior (also it's an ARG)."},
+		"WhatIsPoppyChurch":" Poppy.Church is the house of our savior (also it's an ARG).",
+		"WhatIsAtrium":" The Atrium is a chatroom within Poppy.church. It can be reached from your personal report or www.poppy.church/atrium",
+		"WhatIsBoxOffice":" The box office will bring you to a place where purchasing tickets to Poppy’s Am I A Girl show. You can also purchase Salvation.",
+		"WhatIsSalvation":" Salvation is a VIP package for the Am I A Girl Tour.",
+		"WhatIsBackpack":" Our backpacks are here to help us hold many things and gifts given by Them/They.",
+		"WhatIsCalendar":" The calendar shows us a near weekly look at what is to come in the church.",
+		"WhatDoesTriangleMean":" The triange usually means something will be added to the church.",
+		"WhatDoesCircleMean":" The circle with a slash seems to be linked to church lockdowns.",
+		"WhatIsDevice6514":" Device #6514 is a chess game with Emojis as the pieces.",
+		"WhatIsDevice2":" Device #0002 gave us a way to decipher the emoji strings given in the whispers. If you click a box multiple times, a longer text box will appear under it where you can type out your own messages to be turned into a string of emojis.",
+		"HowGetDevice":" Devices were given out by Them on two separate occasions at 9:36PST. It is unclear how others are to get devices now. None have been received since.",
+		"HowGetJournal":" The journals were received by they again at 9:36PST, and seemed to still be given out VIA wishes for them at 9:36, and following hours after. However, we are currently unsure as to how to get them now.",
+		"WhoIsThey":" They like riddles, They are helping to make the church a lovely place for Poppy Seeds. They are mysterious and only refer to They’selves as “They” They were once a little sister with a pink bow.",
+		"WhoIsThem":" Them likes numbers and codes! Not much is known about them, except that Them was once a little brother.",
+		"WhyPagesReserved":" We currently don't know.",
+		"WhatIsJournal":" The Journals are places to write anything you want."},
 	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
 		"HowToJoinChurch":" Para entrar a *Poppy's Church*, recarga la pagina principal hasta que veas un icono de mano en la esquina inferior izquierda. Esta aparece cada 336 segundos. Puedes usar https://poppy-church.glitch.me/hand para ayudarte.",
@@ -100,20 +114,20 @@ def initializeDataFiles():
 
 def GetUserLanguage(id):
 	userLang = "en"
-	if inDataFile("lang", id):
-		lines = getLines(dataFiles["lang"])
-		for line in lines:
-			index = line.find("|")
-			userLang = line[index+1:-1]
-			print(userLang)
-			break
+	#if inDataFile("lang", id):
+	#	lines = getLines(dataFiles["lang"])
+	#	for line in lines:
+	#		index = line.find("|")
+	#		userLang = line[index+1:-1]
+	#		if id in line:
+	#			break
 	return userLang
 
 def GetLangCode(language):
 	langCode = ""
-	if language == "es" or "spanish":
+	if language in ["es","spanish"]:
 		langCode = "es"
-	elif language == "en" or "english":
+	elif language in ["en","english"]:
 		langCode = "en"
 	return langCode
 	
@@ -130,7 +144,6 @@ def getLines(file):
 	file = open(file, "r")
 	lines = file.readlines()
 	file.close()
-	
 	return lines
 	
 def addDataToFile(key, data):
@@ -161,11 +174,17 @@ def inlist(id):
 async def lang(ctx, language):
 	if len(language) < 15:
 		langCode = GetLangCode(language)
+		user = ctx.message.author
+		if inDataFile("lang", user.id):
+			lines = getLines(dataFiles["lang"])	 
+			file = open(dataFiles["lang"], "w")
+			file.writelines([item for item in lines if user.id not in item and not item.isspace()])
+			file.close()
 		if langCode != "":
-			addDataToFile("lang", ctx.message.author.id + "|" + langCode)
-			await bot.say(ctx.message.author.mention+" Your language has been updated.")
+			addDataToFile("lang", user.id + "|" + langCode)
+			await bot.say(user.mention+" Your language has been updated.")
 		else:
-			await bot.say(ctx.message.author.mention + " Sorry I do not speak " + language + " yet.")
+			await bot.say(user.mention + " Sorry I do not speak " + language + " yet.")
 	
 @bot.command(pass_context=True)
 async def nohelp(ctx):
@@ -470,10 +489,42 @@ async def on_message(message):
 			responses.append("WhoIsPoppy")
 		if "what" in m and "is" in m and "poppy.church" in m:
 			responses.append("WhatIsPoppyChurch")
+		if "what is" in m and "atrium" in m:
+			responses.append("WhatIsAtrium")
+		if "what is" in m and "box office" in m:
+			responses.append("WhatIsBoxOffice")
+		if "what is" in m and "salvation" in m:
+			responses.append("WhatIsSalvation")
+		if "what is" in m and "backpack" in m:
+			responses.append("WhatIsBackpack")
+		if "what is" in m and "calendar" in m:
+			responses.append("WhatIsCalendar")
+		if "what" in m and ("does" in m or "is" in m) and "triangle" in m:
+			responses.append("WhatDoesTriangleMean")
+		if "what" in m and (("does" in m and "mean" in m) or ("is" in m or "for" in m)) and "triangle" in m:
+			responses.append("WhatDoesCircleMean")
+		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "device" in m and "6514" in m:
+			responses.append("WhatIsDevice6514")
+		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "device" in m and "2" in m:
+			responses.append("WhatIsDevice2")
+		if "how" in m and "do" in m and ("get" in m or "receive" in m) and "device" in m:
+			responses.append("HowGetDevice")
+		if "what" in m and ("is" in m or "are" in m) and "journal" in m:
+			responses.append("WhatIsJournal")
+		if "who" in m and ("is" in m or "are" in m) and "they" in m:
+			responses.append("WhoIsThey")
+		if "who" in m and ("is" in m or "are" in m) and "them" in m:
+			responses.append("WhoIsThem")
+		if "why" in m and "pages" in m and "reserved" in m:
+			responses.append("WhyPagesReserved")
+		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "journal" in m:
+			responses.append("HowGetJournal")
 		
 		"""Special FAQ"""
-		if ("we" in m or "i" in m) and " not in a cult" in m:
-			await bot.send_message(message.channel,message.content)
+		if "we are not in a cult" in m:
+			await bot.send_message(message.channel,"We are not in a cult.")
+		if "i am not in a cult" in m:
+			await bot.send_message(message.channel,"I am not in a cult.")
 		if "would you wear it" in m:
 			await bot.send_message(message.channel,"Wear a carrot?")
 		

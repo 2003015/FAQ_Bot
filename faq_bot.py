@@ -521,9 +521,9 @@ async def on_message(message):
 			responses.append("WhyPagesReserved")
 		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "journal" in m:
 			responses.append("HowGetJournal")
-		if "when" in m and (("get" in m and "enter") and "in" and "church" in m:
+		if "when" in m and (("get" in m and "in" in m) or "enter" in m) and "church" in m:
 			responses.append("WhenEnterChurch")
-		if "Thanks" in m and (("you" in m and "Faq-bot") in m:
+		if "thanks" in m or ("thank" in m and "you" in m) and "faq" in m:
 			responses.append("ThanksFaq")
 		"""Special FAQ"""
 		if "we are not in a cult" in m:

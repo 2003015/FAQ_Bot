@@ -75,7 +75,7 @@ faqMessages = {
 		"WhyPagesReserved":" We currently don't know.",
 		"WhatIsJournal":" The Journals are places to write anything you want.",
 	  	"WhenEnterChurch":" Judging by They's reveal, church doors will open 8/8 at 3:36PST",
-	 	"ThanksFaq":"You're welcome <3",}
+	 	"ThanksFaq":"You're welcome <3"},
 	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
 		"HowToJoinChurch":" Para entrar a *Poppy's Church*, recarga la pagina principal hasta que veas un icono de mano en la esquina inferior izquierda. Esta aparece cada 336 segundos. Puedes usar https://poppy-church.glitch.me/hand para ayudarte.",

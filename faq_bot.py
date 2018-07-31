@@ -523,7 +523,7 @@ async def on_message(message):
 			responses.append("HowGetJournal")
 		if "when" in m and (("get" in m and "in" in m) or "enter" in m) and "church" in m:
 			responses.append("WhenEnterChurch")
-		if "thanks" in m or ("thank" in m and "you" in m) and "faq" in m:
+		if ("thanks" in m or ("thank" in m and "you" in m)) and ("faq" in m or "339567608338710530" in m):
 			responses.append("ThanksFaq")
 		"""Special FAQ"""
 		if "we are not in a cult" in m:

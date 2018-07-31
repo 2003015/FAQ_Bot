@@ -73,8 +73,10 @@ faqMessages = {
 		"WhoIsThey":" They like riddles, They are helping to make the church a lovely place for Poppy Seeds. They are mysterious and only refer to They’selves as “They” They were once a little sister with a pink bow.",
 		"WhoIsThem":" Them likes numbers and codes! Not much is known about them, except that Them was once a little brother.",
 		"WhyPagesReserved":" We currently don't know.",
-		"WhatIsJournal":" The Journals are places to write anything you want."},
-	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
+		"WhatIsJournal":" The Journals are places to write anything you want.",
+	        "WhenEnterChurch":" Judging by They's reveal, church doors will open 8/8 at 3:36PST",
+	        "ThanksFaq":"You're welcome <3",}
+	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuev"o por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
 		"HowToJoinChurch":" Para entrar a *Poppy's Church*, recarga la pagina principal hasta que veas un icono de mano en la esquina inferior izquierda. Esta aparece cada 336 segundos. Puedes usar https://poppy-church.glitch.me/hand para ayudarte.",
 		"HowToEnterHole":" Para entrar a 'The Hole', haz click en el boton de *Self-Destruct* en tu pagina de reporte personal.",
@@ -519,7 +521,10 @@ async def on_message(message):
 			responses.append("WhyPagesReserved")
 		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "journal" in m:
 			responses.append("HowGetJournal")
-		
+		if "when" in m and (("get" in m and "in" in m) or "enter" in m) and "church" in m:
+			responses.append("WhenEnterChurch")
+		if "thanks" in m or ("thank" in m and "you" in m) and "faq" in m:
+			responses.append("ThanksFaq")
 		"""Special FAQ"""
 		if "we are not in a cult" in m:
 			await bot.send_message(message.channel,"We are not in a cult.")

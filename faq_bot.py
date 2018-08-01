@@ -418,7 +418,7 @@ async def listdebug(ctx, state: bool):
 		
 @bot.command(pass_context=True)
 async def report(ctx, *args):
-	channel = bot.guilds[0].get_channel("449390764053626880")
+	channel = bot.servers[0].get_channel("449390764053626880")
 	message = ""
 	for word in args:
 		message += word + " "

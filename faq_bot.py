@@ -419,8 +419,8 @@ async def listdebug(ctx, state: bool):
 @bot.command(pass_context=True)
 async def report(ctx, *args):
 	message = ""
-		for word in args[1:]:
-			message += word + " "
+	for word in args[1:]:
+		message += word + " "
 	await bot.say(message)
 
 

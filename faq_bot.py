@@ -415,6 +415,13 @@ async def listdebug(ctx, state: bool):
 	if "219260963268984832" in ctx.message.author.id:
 		global listDebugState 
 		listDebugState = state
+		
+@bot.command(pass_context=True)
+async def report(ctx, *args):
+	message = ""
+		for word in args[1:]:
+			message += word + " "
+	await bot.say(message)
 
 
 @bot.event

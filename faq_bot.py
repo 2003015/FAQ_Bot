@@ -419,11 +419,11 @@ async def listdebug(ctx, state: bool):
 @bot.command(pass_context=True)
 async def report(ctx, *args):
 	server = bot.get_server("447919319339499550")
-	channel = server.get_channel("449390764053626880")
+	channel = server.get_channel("474450317480689664")
 	message = ""
 	for word in args:
 		message += word + " "
-	await bot.send_message(channel, ctx.message.author.mention+": "+message)
+	await bot.send_message(channel, "New Report <@&450680633560399872>:\n"+ctx.message.author.mention+": "+message)
 
 
 @bot.event

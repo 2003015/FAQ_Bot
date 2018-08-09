@@ -73,8 +73,8 @@ faqMessages = {
 		"WhoIsThey":" They like riddles, They are helping to make the church a lovely place for Poppy Seeds. They are mysterious and only refer to They’selves as “They” They were once a little sister with a pink bow.",
 		"WhoIsThem":" Them likes numbers and codes! Not much is known about them, except that Them was once a little brother.",
 		"WhyPagesReserved":" We currently don't know.",
-		"WhatIsJournal":" The Journals are places to write anything you want."}
-		"WhenWillChurchOpen":" Them have confirmed the church will open August 8th 2018 at 9:36PST."},
+		"WhatIsJournal":" The Journals are places to write anything you want.",
+		"WhenWillChurchOpen":" Them have confirmed the church will open August 8th 2018 at 9:36PST.",
 	 	"ThanksFaq":" You're welcome <3"},
 	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
@@ -530,7 +530,7 @@ async def on_message(message):
 			responses.append("WhyPagesReserved")
 		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "journal" in m:
 			responses.append("HowGetJournal")
-		if "when" in m and "will" in m and "Open" in m and("get" in m and "in" in m) and "Church" in m:
+		if "when" in m and "will" in m and "open" in m and("get" in m and "in" in m) and "church" in m:
 			responses.append("WhenWillChurchOpen")
 		if ("thanks" in m or ("thank" in m and "you" in m)) and ("faq" in m or "339567608338710530" in m):
 			responses.append("ThanksFaq")
@@ -541,11 +541,11 @@ async def on_message(message):
 			await bot.send_message(message.channel,"I am not in a cult.")
 		if "would you wear it" in m:
 			await bot.send_message(message.channel,"Wear a carrot?")
-		if "Wooooah" in m:
+		if "wooooah" in m:
 			await bot.send_message(message.channel,"We're half way there! Livin' on a prayer!")
-		if "I hate faq bot" in m:
+		if "i hate faq bot" in m:
 			await bot.send_message(message.channel, "Faq bot still loves you."
-		if "Is Faq bot sentient" in m:
+		if "isfFaq bot sentient" in m:
 			await bot.send_message(message.channel, "Yes. Faq bot think's all his own."
 					     
 		

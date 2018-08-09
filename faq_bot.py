@@ -544,9 +544,9 @@ async def on_message(message):
 		if "wooooah" in m:
 			await bot.send_message(message.channel,"We're half way there! Livin' on a prayer!")
 		if "i hate faq bot" in m:
-			await bot.send_message(message.channel, "Faq bot still loves you."
-		if "isfFaq bot sentient" in m:
-			await bot.send_message(message.channel, "Yes. Faq bot think's all his own."
+			await bot.send_message(message.channel, "Faq bot still loves you.")
+		if "is faq bot sentient" in m:
+			await bot.send_message(message.channel, "Yes. Faq bot think's all his own.")
 					     
 		
 		for answer in responses:

@@ -75,6 +75,7 @@ faqMessages = {
 		"WhyPagesReserved":" We currently don't know.",
 		"WhatIsJournal":" The Journals are places to write anything you want."}
 		"WhenWillChurchOpen":" Them have confirmed the church will open August 8th 2018 at 9:36PST."},
+	 	"ThanksFaq":" You're welcome <3"},
 	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
 		"HowToJoinChurch":" Para entrar a *Poppy's Church*, recarga la pagina principal hasta que veas un icono de mano en la esquina inferior izquierda. Esta aparece cada 336 segundos. Puedes usar https://poppy-church.glitch.me/hand para ayudarte.",
@@ -414,6 +415,15 @@ async def listdebug(ctx, state: bool):
 	if "219260963268984832" in ctx.message.author.id:
 		global listDebugState 
 		listDebugState = state
+		
+@bot.command(pass_context=True)
+async def report(ctx, *args):
+	server = bot.get_server("447919319339499550")
+	channel = server.get_channel("474450317480689664")
+	message = ""
+	for word in args:
+		message += word + " "
+	await bot.send_message(channel, "New Report <@&450680633560399872>:\n"+ctx.message.author.mention+": "+message)
 
 
 @bot.event
@@ -522,7 +532,8 @@ async def on_message(message):
 			responses.append("HowGetJournal")
 		if "when" in m and "will" in m and "Open" in m and("get" in m and "in" in m) and "Church" in m:
 			responses.append("WhenWillChurchOpen")
-		
+		if ("thanks" in m or ("thank" in m and "you" in m)) and ("faq" in m or "339567608338710530" in m):
+			responses.append("ThanksFaq")
 		"""Special FAQ"""
 		if "we are not in a cult" in m:
 			await bot.send_message(message.channel,"We are not in a cult.")

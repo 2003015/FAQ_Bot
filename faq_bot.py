@@ -47,7 +47,7 @@ faqMessages = {
 		"WhatIsPopcoin":" https://poppy.church/popcoin was found. We are unsure of what it does. Popcoin was the name given by us to the last section on the personal report.",
 		"WhatArePoints":" We aren't yet sure what the points on the reports are for.",
 		"WhatIsLove":" Baby don't hurt me, don't hurt me, no more",
-		"WhenWillIBeAccepted":" We currently aren’t sure. But **They** has given us a hint that when the chimes sound, the doors will open.",
+		"WhenWillIBeAccepted":" We will be accepted or Denied in the next 24hours. Church opening pending 8/8 9:36PST",
 		"WhatIsVip":" You get the ability to create a VIP room by ascending. Nothing else is known about it.",
 		"WhoClicked":" We used to be able to, but it led to harassment and the ability was removed.",
 		"WhatIsSelfDestruct":" Self-destructing takes you to the hole. Neither are available right now.",
@@ -73,8 +73,8 @@ faqMessages = {
 		"WhoIsThey":" They like riddles, They are helping to make the church a lovely place for Poppy Seeds. They are mysterious and only refer to They’selves as “They” They were once a little sister with a pink bow.",
 		"WhoIsThem":" Them likes numbers and codes! Not much is known about them, except that Them was once a little brother.",
 		"WhyPagesReserved":" We currently don't know.",
-		"WhatIsJournal":" The Journals are places to write anything you want.",
-	  	"WhenEnterChurch":" Judging by They's reveal, church doors will open 8/8 at 3:36PST",
+		"WhatIsJournal":" The Journals are places to write anything you want."}
+		"WhenWillChurchOpen":" Them have confirmed the church will open August 8th 2018 at 9:36PST."},
 	 	"ThanksFaq":" You're welcome <3"},
 	"es":{"HowToAscend":" Necesitas dar click a la vela cuando este apagada y esperar a que nadie la apague de nuevo por 777 segundos. Tenemos una lista organizada de quien va a ascender y en que orden,por favor pide que te añadan a la lista, mediante un List Keeper en #the-hole",
 		"WhatIsAscension":" Ascender te permite salir del 'The Hole' mas rapido. Tambien recibiras *51 Dedications Points* y la habilidad de crear un Cuarto VIP mas adelante.",
@@ -530,8 +530,8 @@ async def on_message(message):
 			responses.append("WhyPagesReserved")
 		if "what" in m and (("does" in m and "do" in m) or ("is" in m or "for" in m)) and "journal" in m:
 			responses.append("HowGetJournal")
-		if "when" in m and (("get" in m and "in" in m) or "enter" in m) and "church" in m:
-			responses.append("WhenEnterChurch")
+		if "when" in m and "will" in m and "Open" in m and("get" in m and "in" in m) and "Church" in m:
+			responses.append("WhenWillChurchOpen")
 		if ("thanks" in m or ("thank" in m and "you" in m)) and ("faq" in m or "339567608338710530" in m):
 			responses.append("ThanksFaq")
 		"""Special FAQ"""
@@ -541,6 +541,13 @@ async def on_message(message):
 			await bot.send_message(message.channel,"I am not in a cult.")
 		if "would you wear it" in m:
 			await bot.send_message(message.channel,"Wear a carrot?")
+		if "Wooooah" in m:
+			await bot.send_message(message.channel,"We're half way there! Livin' on a prayer!")
+		if "I hate faq bot" in m:
+			await bot.send_message(message.channel, "Faq bot still loves you."
+		if "Is Faq bot sentient" in m:
+			await bot.send_message(message.channel, "Yes. Faq bot think's all his own."
+					     
 		
 		for answer in responses:
 			await send(message, user, faqMessages[GetUserLanguage(user.id)][answer])
